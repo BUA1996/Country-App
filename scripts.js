@@ -1,11 +1,16 @@
-console.log('baron');
+console.log('baron'); //testing your js file
+
+//globall variables
 const BASE_API = "https://restcountries.com/v3.1/all";
 const countries = document.querySelector('.countries');
+let allCountries = [];
 
+//api call function
 const endPoints = async () =>{
     try{
         const data = await fetch(`${BASE_API}`);
         const response = await data.json();
+        allCountries = response;
         response.forEach(element => {
             showCountry(element);
             console.log('bua', element);
@@ -16,6 +21,7 @@ const endPoints = async () =>{
     }
 }
 
+//creating the div to show details about a country
 function showCountry(data){
         const country = document.createElement('div');
         country.classList.add("country");
@@ -31,22 +37,43 @@ function showCountry(data){
     countries.appendChild(country);
 }
 
+//elements calls
 const dropdown = document.querySelector('.dropdown');
 const drop = document.querySelector('.drop');
 const selectRegion = document.querySelectorAll('.selectRegion');
 
+//toggling the drop
 dropdown.addEventListener('click', () =>{
     drop.classList.toggle("show");
 })
 
- 
+//grab the dropdown to make it dynamic
 selectRegion.forEach(element =>{
     element.addEventListener('click', () =>{
         const selectedRegion = element.innerText.toLowerCase().trim();
-        endPoints(selectedRegion);
-        drop.classList.remove("show");
-        console.log('breee',element.innerText); 
+        filterAndDisplayCountries(selectedRegion);
+        drop.classList.remove("show"); 
     })
+})
+
+//filtering the countries
+function filterAndDisplayCountries(region) {
+    countries.innerHTML = '';
+    const filteredCountries = allCountries.filter(country => {
+        return country.region.toLowerCase() === region;
+    });
+    filteredCountries.forEach(country => {
+        showCountry(country);
+    });
+}
+
+//search by country
+const sear = document.querySelector('#search');
+const input = document.querySelector('.input');
+
+sear.addEventListener('click', () =>{
+    let exp = input.value;
+    console.log('baron kings', exp);
 })
 
 
