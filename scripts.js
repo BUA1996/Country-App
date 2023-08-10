@@ -1,10 +1,10 @@
 console.log('baron');
-const BASE_API = "https://restcountries.com/v3.1/region/";
+const BASE_API = "https://restcountries.com/v3.1/all";
 const countries = document.querySelector('.countries');
 
-const endPoints = async (regions = 'africa') =>{
+const endPoints = async () =>{
     try{
-        const data = await fetch(`${BASE_API}${regions}`);
+        const data = await fetch(`${BASE_API}`);
         const response = await data.json();
         response.forEach(element => {
             showCountry(element);
@@ -31,4 +31,24 @@ function showCountry(data){
     countries.appendChild(country);
 }
 
+const dropdown = document.querySelector('.dropdown');
+const drop = document.querySelector('.drop');
+const selectRegion = document.querySelectorAll('.selectRegion');
+
+dropdown.addEventListener('click', () =>{
+    drop.classList.toggle("show");
+})
+
+ 
+selectRegion.forEach(element =>{
+    element.addEventListener('click', () =>{
+        const selectedRegion = element.innerText.toLowerCase().trim();
+        endPoints(selectedRegion);
+        drop.classList.remove("show");
+        console.log('breee',element.innerText); 
+    })
+})
+
+
 endPoints();
+ 
