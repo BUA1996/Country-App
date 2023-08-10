@@ -4,15 +4,34 @@
         <meta charset="utf-8">
         <title>Countries App</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <h5>Baron</h5>
-
-
-
-
-        <script href="scripts.js">
-            console.log('Baron');
-        </script>
+        <div class="header">
+            <h1>Where in the world?</h1>
+            <button class="switchmode"><i class="far fa-moon"></i> Dark Mode</p>
+        </div>
+        <div class="subheader">
+            <div class="search-input">
+                <input type="text" placeholder="Search for a country...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="dropdowncontainer">
+                <div class="dropdown">
+                    <p>Filter by Region</p>
+                    <button><i class="fas fa-chevron-down"></i></button>
+                </div> 
+                <div class="drop">
+                    <p>Africa</p>
+                    <p>Europe</p>
+                    <p>America</p>
+                    <p>Asia</p>
+                    <p>Oceanic</p>
+                </div>
+            </div>
+        </div>
+        <div class="countries">
+        </div>
+        <script src="scripts.js"></script>
     </body>
 </html>
