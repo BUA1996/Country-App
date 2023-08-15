@@ -118,6 +118,7 @@ body {
 
 .countryflag {
     height: 250px;
+    cursor: pointer;
 }
 
 .countryflag img{
