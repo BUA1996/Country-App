@@ -19,6 +19,7 @@ const endPoints = async () =>{
         console.log(error);
         return error;
     }
+    console.log(allCountries)
 }
 
 //creating the div to show details about a country
@@ -34,6 +35,11 @@ const showCountry = async (data) =>{
         <p><strong>Region: </strong>${data.region}</p>
         <p><strong>Capital: </strong>${data.capital}</p>
     </div>`;
+
+    //click functionality
+    country.addEventListener('click', () => {
+        window.location.href = `index2.html?country=${encodeURIComponent(JSON.stringify(data))}`;
+    })
     countries.appendChild(country);
 }
 

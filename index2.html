@@ -4,23 +4,87 @@
     <meta charset="utf-8">
     <title>Countries App - Page 2</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Include necessary CSS links -->
+    <style>
+        .backBtn {
+            margin: 100px 50px 0;
+            width: 100px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            height: 40px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .back{
+            width: 100%;
+            padding: 10px;
+            outline: 0;
+            border: 0;
+            font-size: 15px;
+            text-indent: 5px;
+            cursor: pointer;
+        }
+        .country-details-content {
+            display: flex;
+            margin: 100px 50px 0;
+            /* justify-content: space-between; */
+            gap: 50px;
+        }
+        .countryinfo{
+            display: flex;
+            gap: 50px;
+        }
+    </style>
 </head>
 <body>
     <div class="header">
-        <h1>Another Page</h1>
+        <h1>Where in the world?</h1>
+        <button class="switchmode"><i class="far fa-moon"></i> Dark Mode</p>
+    </div>
+    <div class="backBtn">
+        <button class="back">← Back</button>
     </div>
     <div class="country-details">
-        <div class="countryflag">
-            <img id="countryFlag" src="#" alt="">
-        </div>
-        <div class="countryinfo">
-            <h3 id="countryName"></h3>
-            <p><strong>Population: </strong><span id="countryPopulation"></span></p>
-            <p><strong>Region: </strong><span id="countryRegion"></span></p>
-            <p><strong>Capital: </strong><span id="countryCapital"></span></p>
+        <div class="country-details-content">
+            <!-- Display the country details here using JavaScript -->
         </div>
     </div>
-    <script src="scripts.js"></script>
+    <script>
+        // Retrieve the country data from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const countryData = urlParams.get('country');
+        const parsedCountryData = JSON.parse(decodeURIComponent(countryData));
+        console.log(parsedCountryData)
+        // Display the country details on the page
+        const countryDetailsContent = document.querySelector('.country-details-content');
+        countryDetailsContent.innerHTML = `
+            <div class="countryflag">
+                <img src="${parsedCountryData.flags.png}" alt="">
+            </div>
+            <div class="countryinfo">
+                <div>
+                    <h3>${parsedCountryData.name.common}</h3>
+                    <p><strong>Population: </strong>${parsedCountryData.population}</p>
+                    <p><strong>Region: </strong>${parsedCountryData.region}</p>
+                    <p><strong>Sub Region: </strong>${parsedCountryData.subregion}</p>
+                    <p><strong>Capital: </strong>${parsedCountryData.capital}</p>
+                    <p><strong>Border Countries: </strong>${parsedCountryData.borders}</p>
+                    <!-- Add more details as needed -->
+                </div>
+                <div>
+                    <p><strong>Top Level Domain: </strong>${parsedCountryData.tld[0]}</p>
+                    <p><strong>Currencies: </strong>${parsedCountryData.currencies}</p>
+                    <p><strong>Languages: </strong>${parsedCountryData.languages}</p>
+                </div>
+            </div>`;
+
+            //back button 
+            const back = document.querySelector('.back');
+            back.addEventListener('click', () => {
+                window.location.href = "index.html";
+                console.log('clicked')
+            })
+    </script>
 </body>
 </html>
