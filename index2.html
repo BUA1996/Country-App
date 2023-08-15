@@ -55,7 +55,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const countryData = urlParams.get('country');
         const parsedCountryData = JSON.parse(decodeURIComponent(countryData));
-        console.log(parsedCountryData)
         // Display the country details on the page
         const countryDetailsContent = document.querySelector('.country-details-content');
         countryDetailsContent.innerHTML = `
@@ -83,7 +82,6 @@
             const back = document.querySelector('.back');
             back.addEventListener('click', () => {
                 window.location.href = "index.html";
-                console.log('clicked')
             })
     </script>
 </body>

@@ -13,13 +13,11 @@ const endPoints = async () =>{
         allCountries = response;
         response.forEach(element => {
             showCountry(element);
-            // console.log('bua', element);
         });
     }catch (error){
         console.log(error);
         return error;
     }
-    console.log(allCountries)
 }
 
 //creating the div to show details about a country
@@ -85,7 +83,6 @@ input.addEventListener('keydown', (event) => {
 
 function searchCountry() {
     const userInput = input.value.trim();
-    console.log('baaaa', userInput)
     if (userInput !== '') {
         const selectedCountry = allCountries.find(countrySearch => countrySearch.name.common.toLowerCase() === userInput.toLowerCase());
         if (selectedCountry) {
@@ -100,23 +97,6 @@ function searchCountry() {
 searchBtn?.addEventListener('click', () =>{
     searchCountry();
 })
-
-// const showCountryDetails = async(county) => {
-//     const countryFlag = document.getElementById('countryFlag');
-//     const countryName = document.getElementById('countryName');
-//     const countryPopulation = document.getElementById('countryPopulation');
-//     const countryRegion = document.getElementById('countryRegion');
-//     const countryCapital = document.getElementById('countryCapital');
-
-//     countryFlag.src = county.flags.png;
-//     countryName.textContent = county.name.common;
-//     countryPopulation.textContent = county.population;
-//     countryRegion.textContent = county.region;
-//     countryCapital.textContent = county.capital[0];
-//     showCountryDetails(selectedCountry)
-//     window.location.href = 'index2.html';
-// }
-
 
 endPoints();
  
