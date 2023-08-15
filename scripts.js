@@ -1,4 +1,4 @@
-console.log('baron'); //testing your js file
+// console.log('baron'); //testing your js file
 
 //globall variables
 const BASE_API = "https://restcountries.com/v3.1/all";
@@ -13,7 +13,7 @@ const endPoints = async () =>{
         allCountries = response;
         response.forEach(element => {
             showCountry(element);
-            console.log('bua', element);
+            // console.log('bua', element);
         });
     }catch (error){
         console.log(error);
@@ -22,7 +22,7 @@ const endPoints = async () =>{
 }
 
 //creating the div to show details about a country
-function showCountry(data){
+const showCountry = async (data) =>{
         const country = document.createElement('div');
         country.classList.add("country");
         country.innerHTML = `<div class="countryflag">
@@ -43,7 +43,7 @@ const drop = document.querySelector('.drop');
 const selectRegion = document.querySelectorAll('.selectRegion');
 
 //toggling the drop
-dropdown.addEventListener('click', () =>{
+dropdown?.addEventListener('click', () =>{
     drop.classList.toggle("show");
 })
 
@@ -68,13 +68,48 @@ function filterAndDisplayCountries(region) {
 }
 
 //search by country
-const sear = document.querySelector('#search');
+const searchBtn = document.getElementById('searchBtn');
 const input = document.querySelector('.input');
 
-sear.addEventListener('click', () =>{
-    let exp = input.value;
-    console.log('baron kings', exp);
+input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter'){
+        searchCountry();
+    }
 })
+
+function searchCountry() {
+    const userInput = input.value.trim();
+    console.log('baaaa', userInput)
+    if (userInput !== '') {
+        const selectedCountry = allCountries.find(countrySearch => countrySearch.name.common.toLowerCase() === userInput.toLowerCase());
+        if (selectedCountry) {
+            countries.innerHTML = '';
+            showCountry(selectedCountry);
+        } else {
+            countries.innerHTML = '<p>No matching country found!</p>';
+        }
+    }
+}
+
+searchBtn?.addEventListener('click', () =>{
+    searchCountry();
+})
+
+// const showCountryDetails = async(county) => {
+//     const countryFlag = document.getElementById('countryFlag');
+//     const countryName = document.getElementById('countryName');
+//     const countryPopulation = document.getElementById('countryPopulation');
+//     const countryRegion = document.getElementById('countryRegion');
+//     const countryCapital = document.getElementById('countryCapital');
+
+//     countryFlag.src = county.flags.png;
+//     countryName.textContent = county.name.common;
+//     countryPopulation.textContent = county.population;
+//     countryRegion.textContent = county.region;
+//     countryCapital.textContent = county.capital[0];
+//     showCountryDetails(selectedCountry)
+//     window.location.href = 'index2.html';
+// }
 
 
 endPoints();
